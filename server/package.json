@@ -1,0 +1,16 @@
+{
+    "name": "05-token-blocker-nginx-redis",
+    "version": "1.0.0",
+    "description": "Este projeto demonstra como configurar o NGINX para bloquear ou permitir acesso com base em tokens armazenados no Redis.",
+    "main": "server.js",
+    "scripts": {
+      "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+      "ioredis": "^5.5.0",
+      "restify": "^11.1.0"
+    }
+  }
+  

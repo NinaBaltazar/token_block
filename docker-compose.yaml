@@ -1,0 +1,34 @@
+services:
+  redis:
+    image: redis:latest
+    ports:
+      - "6379:6379"
+    networks:
+      - my-network
+
+  server:
+    build: ./server
+    ports:
+      - "8082:8082"
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+    depends_on:
+      - redis
+    networks:
+      - my-network
+
+  openresty:
+    image: openresty/openresty:alpine
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/nginx.conf:/usr/local/openresty/nginx/conf/nginx.conf 
+      - ./nginx/lua/block_token.lua:/usr/local/openresty/nginx/lua/block_token.lua
+    depends_on:
+      - server
+    networks:
+      - my-network
+networks:
+  my-network:
+    driver: bridge
